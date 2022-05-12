@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboards.css')}}">
     <title>Admin Panel</title>
     <style>
         .side-menu .brand-name{
@@ -16,17 +16,18 @@
     <div class="side-menu">
 
         <div class="brand-name"><h1>Video Based Monitoring</h1></div>
-        <ul>
-
-            <li><a href="dashboard.html"><img src="dashboard.png" alt="">Dashboard</a></li>
-            <li><img src="reading-book.png" alt="">New Registration</li>
-            
-            <!-- <li><a href="school.html">Total Users</a></li>
-            <li><a href="totalvoilation.html">Total Voilations</a></li>
-            <li><a>Update User Details</a></li>
-            <li><a  href="delete.html">Delete User</a></li>
-            <li>Settings</li> -->
-        </ul>
+        
+    <ul>
+        <li><a href="{{ url_for('home') }}"><img src="dashboard.png" alt="">Dashboard</a></li>
+        <!-- <li><img src="dashboard.png" alt="">Dashboard</li> -->
+        <li><a href="{{ url_for('new') }}">New Registration</a></li>
+        
+        <li><a href="{{ url_for('school') }}">Total Users</a></li>
+        <li><a href="{{ url_for('totalvoilation') }}">Total Violations</a></li>
+        <li><a>Update User Details</a></li>
+        <li><a  href="{{ url_for('delete') }}">Delete User</a></li>
+        <li><a href="#">About</a></li>
+    </ul>
 
     </div>
 
@@ -48,7 +49,7 @@
               <div class="new-content">
                     <h2>New Registration</h2><br><br>
 
-                    <form action="/action_page.php">
+                    <form id="registrationForm" method="POST" action="/new">
                            <label for="fname">Name:</label>
                            <input type="text" id="fname" name="fname" value="John" required><br><br>
 
@@ -56,13 +57,13 @@
                            <label for="lname">Last name:</label>
                             <input type="text" id="lname" name="lname" value="Doe" required><br><br>
                            <label for="fname">Mobile No</label>
-                           <input type="tel" id="fname" name="fname" value="" required><br><br>
-                         <label for="lname">E-mail Address :</label>
-                         <input type="email" id="lname" name="lname" value="abc@gmail.com" required><br><br>
-                         <label for="lname">Department :</label>
-                         <input type="text" id="lname" name="lname" value="abc" required><br><br>
-                         <label for="lname">ID No :</label>
-                         <input type="text" id="lname" name="lname" value="123" required><br><br>
+                           <input type="tel" id="mobile" name="mobile" value="97xxxxxx" required><br><br>
+                         <label for="email">E-mail Address :</label>
+                         <input type="email" id="email" name="email" value="abc@gmail.com" required><br><br>
+                         <label for="dept">Department :</label>
+                         <input type="text" id="dept" name="dept" value="Computer Engineering" required><br><br>
+                         <label for="stud_id">ID No :</label>
+                         <input type="text" id="stud_id" name="stud_id" value="123456" required><br><br>
                          
                          <lable><a href="#" >Click to <br>capture image</a></lable> <br><br>
 
