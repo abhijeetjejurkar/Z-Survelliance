@@ -1,7 +1,6 @@
 from flask import Flask, render_template,request,flash,redirect,url_for,session, Response
 from flask_sqlalchemy import SQLAlchemy
 from camera import VideoCamera
-import Predict
 import pdb
 import threading
 from multiprocessing import Process
