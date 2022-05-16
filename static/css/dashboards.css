@@ -15,11 +15,11 @@ body{
 a{
     text-decoration: none;
 
-    color:#300338;
+    color:#818181;
     
 }
 a:hover{
-    color:rebeccapurple;
+    color:#f1f1f1;
 }
 
 li{
@@ -31,39 +31,39 @@ li{
 h1,h2{
     color:#444;
 }
+
 #h2
 {
     color: #999
 }
 
 .side-menu{
-     
+    overflow-x: hidden;
+    transition: 0.5s;
+    z-index: 1;
     position:fixed;
-    background: #f05462;
-    width: 20vw;
-    min-height: 100vh;
+    background: #111;
+    width: 260px;
+    height: 100%;
     display:flex;
     flex-direction: column;
 
 }
 
 .side-menu .brand-name{
-    height: 15vh;
+    margin-top: 40px;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-
     padding: 20px;
-   
-
-    border-bottom: solid 2px;
-
-
+    border-bottom: solid 2px white;
 }
 .side-menu ul{
     margin-top: 30px;
 
 }
+
 
 .side-menu li{
     margin-top: 5px;
@@ -76,27 +76,32 @@ h1,h2{
 }
 
 .side-menu li:hover{
-    background:#dcd0c0;
-    color:rebeccapurple;
+    background:#111;
+    color:#f1f1f1;
 }
+
+.side-menu .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
 
 .container{
-
-    position: absolute;
-    right:0;
-    width: 80vw;
-    height:100vh;
-    background: #f1f1f1;
+    position:absolute;
+    margin-left: 260px;
+    width: 80%;
+    height: 100%;
 }
 
-.container .header{
 
+.container .header{
     top:0;
     right:0;
-    width:80vw;
-    height: 10vh;
+    width:100%;
+    height: 15vh;
     background: white;
-    /* display: flex; */
     align-items: center;
     justify-content:center;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -114,26 +119,23 @@ h1,h2{
 .container .content {
     position: relative;
     margin-top: 10vh;
-    min-height: 90vh;
-
 }
 
+.container .videostream{
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
 .container .content .cards {
     padding:2px 15px;
-    /* margin: 30px 30px; */
     display: flex;
-    /* align-items:center; */
     justify-content: space-between;
     flex-wrap: wrap;
-
-    /* border-bottom: solid 2px; */
 }
 
 .container .content .cards .card{
     width :180px;
     height: 180px;
     background: white;
-    /* padding-left: 50px; */
     margin:20px 10px;
    display: flex;
    align-items: center;
@@ -148,8 +150,6 @@ h1,h2{
     justify-content: space-around;
     padding: 15px 10px;
     border-bottom: 2px solid #999;
-
-
 }
 
 table{
@@ -157,8 +157,6 @@ table{
     justify-content: center;
 
     padding :10px;
-    /* width: 300px; */
-
 }
 
 th,td{
@@ -190,3 +188,9 @@ table, th, td {
     
 }
 }
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+  }
+  
