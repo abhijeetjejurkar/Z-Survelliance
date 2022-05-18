@@ -110,6 +110,7 @@ class VideoCamera(object):
             self.dictl.pop(id)
             self.dicta.pop(id)
         mycursor.execute("COMMIT;")
+        print("COMMITTED")
         self.video.release()
 
     def get_frame(self):
@@ -186,6 +187,8 @@ class VideoCamera(object):
                     query = "INSERT INTO entry_exit_logs(EmployeeID,EntryDate,EntryTime,ExitDate,ExitTime) VALUES('"+ str(id) +"','"+ EntryDate +"','"+ EntryTime +"','"+ ExitDate +"','"+ ExitTime +"');"
                     mycursor.execute(query)
                     print("Added Entry of Person with last exit time(stored in self.dictl) and entry time(stored in self.dicta)")
+                    mycursor.execute("COMMIT;")
+                    print("COMMITTED")
                     delete.append(id)
             for id in delete:
                 self.dictl.pop(id)
