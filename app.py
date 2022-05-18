@@ -26,14 +26,31 @@ mycursor.execute("CREATE TABLE IF NOT EXISTS Users(EId INT NOT NULL AUTO_INCREME
   
 app = Flask("Z-Survelliance") #creating the Flask class object   
 app.secret_key=SECRET_KEY
+app.config["CACHE_TYPE"] = "null"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/z_intelligence'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
 
 @app.route('/') #decorator drfines the   
-def home():  
-    return render_template("dashboard.html")
+def home():
+    # if request.method=='POST' or request.method=='GET':  
+    # ,methods=["GET","POST"]
+    try:
+        mycursor1 = mydb.cursor()
+        print("Fetched")
+        mycursor1.execute("select * from entry_exit_logs")
+        myresult1 = mycursor1.fetchall()
+        mycursor1.close()
+        # mydb.close()
+    except Exception as e:
+        # print(e)
+        print("Error in Select Operation",e)
+        flash("Error in Select Operation","danger")
+    # finally:
+    #     return redirect(url_for(""))
+    #     con.close()   
+    return render_template("dashboard.html",items = myresult1)
 
 @app.route('/new',methods=["GET","POST"]) #decorator drfines the   
 def new():
@@ -51,6 +68,7 @@ def new():
             print("Added Entry of new User")
             print("Record Added  Successfully")
             flash("Record Added  Successfully","success")
+            
         except Exception as e:
             # print(e)
             print("Error in Insert Operation",e)
