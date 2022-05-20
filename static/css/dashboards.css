@@ -8,7 +8,6 @@
 }
 
 body{
-
     min-height: 100vh;
 }
 
@@ -89,6 +88,8 @@ h1,h2{
   }
 
 .container{
+    
+    
     position:absolute;
     margin-left: 260px;
     width: 80%;

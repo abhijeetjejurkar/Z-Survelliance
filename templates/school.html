@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type=text/javascript src="{{url_for('static', filename='js/nav.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboards.css')}}">
     <title>Admin Panel</title>
     <style>
@@ -13,27 +14,32 @@
     </style>
 </head>
 <body>
-    <div class="side-menu">
-
-        <div class="brand-name"><h1>Brand</h1></div>
-
+    <script>
+        document.body.style.backgroundColor = "rgba(0,0,0,0.1)";
+    </script>
+    <div id="mySidenav" class="side-menu">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="brand-name" ><h1 style="color:white;">Video Based Monitoring</h1></div>
         <ul>
             <li><a href="{{ url_for('home') }}"><img src="dashboard.png" alt="">Dashboard</a></li>
             <!-- <li><img src="dashboard.png" alt="">Dashboard</li> -->
-            <li><a href="{{ url_for('new') }}">New Registration</a></li>
-            
+            <li><a href="{{ url_for('new') }}">New Registration</a></li>                
             <li><a href="{{ url_for('school') }}">Total Users</a></li>
             <li><a href="{{ url_for('totalvoilation') }}">Total Violations</a></li>
             <li><a>Update User Details</a></li>
             <li><a  href="{{ url_for('delete') }}">Delete User</a></li>
             <li><a href="#">About</a></li>
         </ul>
-        
-
     </div>
 
-    <div class="container">
+    <div id="main" class="container">
         <div class="header">
+            <center style="padding-top:8px ;"><h1>Admin Panel</h1></center>
+
+            <div class="right">                                   
+                <button type="logout">Log Out</button>
+            </div>
+            <span style="font-size:30px;cursor:pointer;" onclick="openNav()">&#9776; Menu</span>
             <div class="nav">
                 <div class="search">
                     <input type="text" placeholder="Search..">
@@ -42,6 +48,48 @@
                 <div class="user">
                     <a href="#" class="btn">Add New</a>
                 </div>
+            </div>
+        </div>
+        <div id="tb1" class="content-2">
+            <div class="recent-violations">
+                <div class="title">
+                    <h1>Total Users</h1>
+                </div>
+                <center>
+                    <br>
+                    <!-- <form id="entryExitTable" method="POST" action="/">     -->
+                    <table style="border: #999; border-width:5px; border-style:solid;">
+                        <tr>
+                            <th>User ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Mobile Number</th>
+                            <th>Email ID</th>
+                            <th>Department</th> 
+
+                        </tr>
+                        <tr>
+                            <td>000000</td>
+                            <td>Abc</td>
+                            <td>Xyz</td>
+                            <td>Computer Engineering</td>
+                            <td>97xxxxxxxx</td>
+                            <td>abc@gmail.com</td>
+                        </tr>
+                        {% for item in items %}
+                        <tr>
+                            <td>{{item[1]}}</td>
+                            <td>{{item[2]}}</td>
+                            <td>{{item[3]}}</td>
+                            <td>{{item[6]}}</td>
+                            <td>{{item[4]}}</td>
+                            <td>{{item[5]}}</td>
+                        </tr>
+                        {% endfor %}
+                            
+                    </table>
+                    <!-- </form> -->
+                </center>
             </div>
         </div>
     </div>
