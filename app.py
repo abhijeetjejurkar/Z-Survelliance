@@ -34,15 +34,27 @@ db = SQLAlchemy(app)
 
 @app.route('/') #decorator drfines the   
 def home():
+
     # if request.method=='POST' or request.method=='GET':  
     # ,methods=["GET","POST"]
     try:
-        mycursor1 = mydb.cursor()
-        print("Fetched")
+        mydb1 = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="",
+        #database="mydatabase"
+        )
+
+        #print(mydb)
+        mycursor1 = mydb1.cursor()
+        mycursor1.execute("CREATE DATABASE IF NOT EXISTS z_intelligence")
+        mycursor1.execute("USE z_intelligence")
+        mycursor1.execute("CREATE TABLE IF NOT EXISTS Entry_Exit_Logs(EntryId INT NOT NULL AUTO_INCREMENT, EmployeeID VARCHAR(20) NOT NULL, EntryDate DATE NOT NULL, EntryTime TIME NOT NULL, ExitDate DATE NOT NULL, ExitTime TIME NOT NULL, PRIMARY KEY (EntryId))")
         mycursor1.execute("select * from entry_exit_logs")
         myresult1 = mycursor1.fetchall()
+        # print(myresult1)
         mycursor1.close()
-        # mydb.close()
+        mydb1.close()
     except Exception as e:
         # print(e)
         print("Error in Select Operation",e)
