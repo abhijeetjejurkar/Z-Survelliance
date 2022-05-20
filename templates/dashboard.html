@@ -12,6 +12,9 @@
     <title>Admin Panel</title>
 </head>
 <body>
+    <script>
+        document.body.style.backgroundColor = "rgba(0,0,0,0.1)";
+    </script>
     <div id="mySidenav" class="side-menu">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="brand-name" ><h1 style="color:white;">Video Based Monitoring</h1></div>
@@ -35,8 +38,9 @@
             <div class="right">                                   
                 <button type="logout">Log Out</button>
             </div>
-
             <span style="font-size:30px;cursor:pointer;" onclick="openNav()">&#9776; Menu</span>
+            
+        </div>
             <center><img style="padding:5px 5px;background: black;" src="{{ url_for('video_feed') }}"></center>
             <div class="content">
                 <div class="cards">
@@ -67,7 +71,7 @@
                         <center>
                             <br>
                             <!-- <form id="entryExitTable" method="POST" action="/">     -->
-                            <table style="border: #999; border-width:5px; border-style:solid;">
+                            <table style="border: #111; border-width:5px; border-style:solid;">
                                 <tr>
                                     <th>Entry ID</th>
                                     <th>Employee ID</th>

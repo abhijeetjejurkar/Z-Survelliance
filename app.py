@@ -45,6 +45,7 @@ def home():
         #database="mydatabase"
         )
 
+        myresult1 = []
         #print(mydb)
         mycursor1 = mydb1.cursor()
         mycursor1.execute("CREATE DATABASE IF NOT EXISTS z_intelligence")
@@ -53,6 +54,8 @@ def home():
         mycursor1.execute("select * from entry_exit_logs")
         myresult1 = mycursor1.fetchall()
         # print(myresult1)
+        myresult1 = myresult1[::-1]
+        myresult1 = myresult1[:15]
         mycursor1.close()
         mydb1.close()
     except Exception as e:
@@ -92,12 +95,63 @@ def new():
     return render_template("new.html")
 
 @app.route('/school') #decorator drfines the   
-def school():  
-    return render_template("school.html")
+def school():
+    try:
+        mydb2 = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="",
+        #database="mydatabase"
+        )
+
+        #print(mydb)
+        mycursor2 = mydb2.cursor()
+        mycursor2.execute("CREATE DATABASE IF NOT EXISTS z_intelligence")
+        mycursor2.execute("USE z_intelligence")
+        mycursor2.execute("CREATE TABLE IF NOT EXISTS Entry_Exit_Logs(EntryId INT NOT NULL AUTO_INCREMENT, EmployeeID VARCHAR(20) NOT NULL, EntryDate DATE NOT NULL, EntryTime TIME NOT NULL, ExitDate DATE NOT NULL, ExitTime TIME NOT NULL, PRIMARY KEY (EntryId))")
+        mycursor2.execute("select * from users")
+        myresult2 = mycursor2.fetchall()
+        # print(myresult1)
+        mycursor2.close()
+        mydb2.close()
+    except Exception as e:
+        # print(e)
+        print("Error in Select Operation",e)
+        flash("Error in Select Operation","danger")
+    # finally:
+    #     return redirect(url_for(""))
+    #     con.close()  
+    return render_template("school.html",items = myresult2)
 
 @app.route('/totalvoilation') #decorator drfines the   
 def totalvoilation():  
-    return render_template("totalvoilation.html")
+    try:
+        mydb3 = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="",
+        #database="mydatabase"
+        )
+
+        myresult3 = []
+        #print(mydb)
+        mycursor3 = mydb3.cursor()
+        mycursor3.execute("CREATE DATABASE IF NOT EXISTS z_intelligence")
+        mycursor3.execute("USE z_intelligence")
+        mycursor3.execute("CREATE TABLE IF NOT EXISTS Entry_Exit_Logs(EntryId INT NOT NULL AUTO_INCREMENT, EmployeeID VARCHAR(20) NOT NULL, EntryDate DATE NOT NULL, EntryTime TIME NOT NULL, ExitDate DATE NOT NULL, ExitTime TIME NOT NULL, PRIMARY KEY (EntryId))")
+        mycursor3.execute("select * from entry_exit_logs")
+        myresult3 = mycursor3.fetchall()
+        # print(myresult1)
+        mycursor3.close()
+        mydb3.close()
+    except Exception as e:
+        # print(e)
+        print("Error in Select Operation",e)
+        flash("Error in Select Operation","danger")
+    # finally:
+    #     return redirect(url_for(""))
+    #     con.close()   
+    return render_template("totalvoilation.html",items = myresult3)
 
 @app.route('/delete') #decorator drfines the   
 def delete():  
