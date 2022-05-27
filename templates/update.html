@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type=text/javascript src="{{url_for('static', filename='js/nav.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboards.css')}}">
+    <title>Admin Panel</title>
+    <style>
+        .side-menu .brand-name{
+    height: 25vh;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        document.body.style.backgroundColor = "rgba(0,0,0,0.1)";
+    </script>
+    <div id="mySidenav" class="side-menu">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="brand-name" ><h1 style="color:white;">Video Based Monitoring</h1></div>
+        <ul>
+            <li><a href="{{ url_for('home') }}"><img src="dashboard.png" alt="">Dashboard</a></li>
+            <!-- <li><img src="dashboard.png" alt="">Dashboard</li> -->
+            <li><a href="{{ url_for('new') }}">New Registration</a></li>                
+            <li><a href="{{ url_for('school') }}">Total Users</a></li>
+            <li><a href="{{ url_for('totalvoilation') }}">Total Violations</a></li>
+            <li style="background : rgb(195, 144, 144);"><a href="{{ url_for('update') }}">Update User Details</a></li>
+            <li ><a  href="{{ url_for('delete') }}">Delete User</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </div>
+
+    <div id="main" class="container">
+        <div class="header">
+            
+            <!-- <div class="nav"> -->
+            <center style="padding-top:8px ;"><h1>Admin Panel</h1></center>
+
+            <div class="right">                                   
+                <button type="logout">Log Out</button>
+            </div>
+            <span style="font-size:30px;cursor:pointer;" onclick="openNav()">&#9776; Menu</span>            
+            <div class="nav">
+                <div class="search">
+                    <input type="text" placeholder="Search..">
+                    <button type="submit"><img src="search.png" alt=""></button>
+                </div>
+            </div>
+            <center style="margin-top: 100px;">
+                <div class="new-content">
+                    <h2>Update User</h2><br><br>
+                    
+                    <form id="updateForm" method="POST" action="/update">
+                        Enter ID No. of User you want to update details
+                        <br>If you wan to update ID no. kindly delete the user and Register him again in database.
+                        <br>
+                        <label for="stud_id">ID No. :</label>
+                        <input type="text" id="stud_id" name="stud_id" value="123456" required><br><br>
+                        <label for="fname">First Name:</label>
+                        <input type="text" id="fname" name="fname" value="John" required><br><br>                        
+                        <label for="lname">Last name:</label>
+                        <input type="text" id="lname" name="lname" value="Doe" required><br><br>
+                        <label for="fname">Mobile No</label>
+                        <input type="tel" id="mobile" name="mobile" value="97xxxxxx" required><br><br>
+                        <label for="email">E-mail Address :</label>
+                        <input type="email" id="email" name="email" value="abc@gmail.com" required><br><br>
+                        <label for="dept">Department :</label>
+                        <input type="text" id="dept" name="dept" value="Computer Engineering" required><br><br>
+                        <input type="submit" value="Submit">
+                    </form> 
+                </div>
+            </center>
+        </div>
+    </div>
+</body>
+</html>

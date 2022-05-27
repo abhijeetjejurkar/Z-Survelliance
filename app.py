@@ -1,6 +1,7 @@
 from flask import Flask, render_template,request,flash,redirect,url_for,session, Response
 from flask_sqlalchemy import SQLAlchemy
 from camera import VideoCamera
+import cv2
 import pdb
 import threading
 from multiprocessing import Process
@@ -153,9 +154,89 @@ def totalvoilation():
     #     con.close()   
     return render_template("totalvoilation.html",items = myresult3)
 
-@app.route('/delete') #decorator drfines the   
+@app.route('/update',methods=["GET","POST"]) #decorator drfines the   
+def update():
+    if request.method=='POST':
+        try:
+            fname=request.form['fname']
+            lname=request.form['lname']
+            email=request.form['email']
+            mobile=request.form['mobile']
+            dept=request.form['dept']
+            stud_id=request.form['stud_id']
+            query = "UPDATE users SET fname = '"+fname+"', lname = '"+lname+"', email = '"+str(email)+"', mobile='"+str(mobile)+"', dept ='"+dept+"' WHERE stud_id='"+str(stud_id)+"';"
+            # print(query)
+            mycursor.execute(query)
+            mycursor.execute("COMMIT;")
+            print("Updated Data of user")
+            print("Record Updated  Successfully")
+            flash("Record Updated  Successfully","success")
+            
+        except Exception as e:
+            # print(e)
+            print("Error in Update Operation",e)
+            flash("Error in Update Operation","danger")
+        finally:
+            return redirect(url_for("update"))
+            con.close()
+
+    return render_template("update.html")
+
+
+@app.route('/delete',methods=["GET","POST"]) #decorator drfines the   
 def delete():  
+    if request.method=='POST':
+        try:
+            delId=request.form['delId']
+            query = "DELETE FROM users WHERE stud_id='"+ str(delId) +"';"
+            mycursor.execute(query)
+            mycursor.execute("COMMIT;")
+            print("Deleted Entry of User "+ delId)
+            print("Record Deleted  Successfully")
+            flash("Record Deleted Successfully","success")
+            
+        except Exception as e:
+            # print(e)
+            print("Error in Delete Operation",e)
+            flash("Error in Delete Operation","danger")
+        finally:
+            return redirect(url_for("delete"))
+            con.close()       
     return render_template("delete.html")
+
+@app.route('/cap') #decorator drfines the   
+def cap():  
+    cam = cv2.VideoCapture(0)
+
+    cv2.namedWindow("test")
+
+    img_counter = 0
+
+    while True:
+        ret, frame = cam.read()
+        if not ret:
+            print("failed to grab frame")
+            break
+        cv2.imshow("test", frame)
+        if img_counter>=6:
+            print("Captured 6 Images, closing...")
+            break
+        k = cv2.waitKey(1)
+        if k%256 == 27:
+            # ESC pressed
+            print("Escape hit, closing...")
+            break
+        elif k%256 == 32:
+            # SPACE pressed
+            img_name = "opencv_frame_{}.png".format(img_counter)
+            cv2.imwrite(img_name, frame)
+            print("{} written!".format(img_name))
+            img_counter += 1
+
+    cam.release()
+
+    cv2.destroyAllWindows()
+    return "Nothing"
   
 def gen(camera):
     while True:
