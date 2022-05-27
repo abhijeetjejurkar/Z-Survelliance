@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type=text/javascript src="{{url_for('static', filename='js/nav.js') }}"></script>
+    <script type=text/javascript src="{{url_for('static', filename='js/capture.js') }}"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"> </script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboards.css')}}">
     <title>Admin Panel</title>
     <style>
@@ -23,10 +25,10 @@
         <ul>
             <li><a href="{{ url_for('home') }}"><img src="dashboard.png" alt="">Dashboard</a></li>
             <!-- <li><img src="dashboard.png" alt="">Dashboard</li> -->
-            <li><a href="{{ url_for('new') }}">New Registration</a></li>                
+            <li style="background : rgb(195, 144, 144);"><a href="{{ url_for('new') }}">New Registration</a></li>                
             <li><a href="{{ url_for('school') }}">Total Users</a></li>
             <li><a href="{{ url_for('totalvoilation') }}">Total Violations</a></li>
-            <li><a>Update User Details</a></li>
+            <li><a href="{{ url_for('update') }}">Update User Details</a></li>
             <li><a  href="{{ url_for('delete') }}">Delete User</a></li>
             <li><a href="#">About</a></li>
         </ul>
@@ -47,7 +49,7 @@
             <h2>New Registration</h2><br><br>
 
             <form id="registrationForm" method="POST" action="/new">
-                    <label for="fname">Name:</label>
+                    <label for="fname">First Name:</label>
                     <input type="text" id="fname" name="fname" value="John" required><br><br>
 
                     
@@ -62,10 +64,18 @@
                     <label for="stud_id">ID No :</label>
                     <input type="text" id="stud_id" name="stud_id" value="123456" required><br><br>
                     
-                    <lable><a href="#" >Click to <br>capture image</a></lable> <br><br>
+                    <lable><a href="javascript:void(0)" onclick="opencap()" >Click to <br>capture image</a></lable> <br><br>
 
                     <br>
-                    <p>Capture front, left, right side view of face properly</p><br><br>
+                    <p id="capture">
+                        <script>
+                        document.getElementById("capture").style.display = "none";
+                        // document.getElementById("capture").style.color = "white";
+                        </script>
+                        Capture front, left, right side view of face properly
+                        <br>Press space to capture Image
+                        <br>Press Escape to Stop Capturing
+                    </p><br><br>
                     <input type="submit" value="Submit">
                     
             </form> 

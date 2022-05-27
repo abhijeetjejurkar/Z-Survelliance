@@ -26,8 +26,8 @@
             <li><a href="{{ url_for('new') }}">New Registration</a></li>                
             <li><a href="{{ url_for('school') }}">Total Users</a></li>
             <li><a href="{{ url_for('totalvoilation') }}">Total Violations</a></li>
-            <li><a>Update User Details</a></li>
-            <li><a  href="{{ url_for('delete') }}">Delete User</a></li>
+            <li><a href="{{ url_for('update') }}">Update User Details</a></li>
+            <li style="background : rgb(195, 144, 144);"><a  href="{{ url_for('delete') }}">Delete User</a></li>
             <li><a href="#">About</a></li>
         </ul>
     </div>
@@ -47,10 +47,18 @@
                     <input type="text" placeholder="Search..">
                     <button type="submit"><img src="search.png" alt=""></button>
                 </div>
-                <div class="user">
-                    <a href="#" class="btn">Add New</a>
-                </div>
             </div>
+            <center style="margin-top: 100px;">
+                <div class="new-content">
+                    <h2>Delete User</h2><br><br>
+        
+                    <form id="deleteForm" method="POST" action="/delete">
+                            <label for="delId">Enter ID:</label>
+                            <input type="text" id="delId" name="delId" value="123456" required><br><br>
+                            <input type="submit" value="Submit">
+                    </form> 
+                </div>
+            </center>
         </div>
     </div>
 </body>
