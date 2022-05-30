@@ -1,3 +1,4 @@
+import smtplib
 import cv2
 from tensorflow.keras.models import load_model
 from numpy import expand_dims
@@ -7,6 +8,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.svm import SVC
 from datetime import datetime, timedelta
 import mysql.connector
+import threading
 import numpy as np # linear algebra
 
 
@@ -113,6 +115,18 @@ class VideoCamera(object):
         print("COMMITTED")
         self.video.release()
 
+    def send_mail(self,mycursor,dt):
+        for x in mycursor:
+            rmail=x[0]
+        s = smtplib.SMTP('smtp.gmail.com', 587)
+        s.starttls()
+        s.login("z.survelliance1@gmail.com", "Survelli@nce1")
+        message = "Warning Please wear the mask you have been seen without mask on cam1 Thankyou!!"
+        s.sendmail("z.survelliance1@gmail.com", rmail, message)
+        print("Mail sent to "+rmail)
+        s.quit()
+                        
+
     def get_frame(self):
         
         # We are using Motion JPEG, but OpenCV defaults to capture raw images,
@@ -147,6 +161,11 @@ class VideoCamera(object):
                         print("Created")
                         self.dicta[predict_names[0]]=datetime.now();
                         self.dictl[predict_names[0]]=datetime.now();
+                        query = "SELECT email FROM users where stud_id='"+str(predict_names[0])+"';"
+                        mycursor.execute(query)
+                        send_thread = threading.Thread(target=self.send_mail, args=(mycursor,datetime.now()))
+                        send_thread.start()
+                        
                     elif(predict_names[0] in self.dicta):
                             print("Updated Left")
                             self.dictl[predict_names[0]]=datetime.now();

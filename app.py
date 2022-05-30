@@ -54,9 +54,14 @@ def home():
         mycursor1.execute("CREATE TABLE IF NOT EXISTS Entry_Exit_Logs(EntryId INT NOT NULL AUTO_INCREMENT, EmployeeID VARCHAR(20) NOT NULL, EntryDate DATE NOT NULL, EntryTime TIME NOT NULL, ExitDate DATE NOT NULL, ExitTime TIME NOT NULL, PRIMARY KEY (EntryId))")
         mycursor1.execute("select * from entry_exit_logs")
         myresult1 = mycursor1.fetchall()
+        totalvio=len(myresult1)
         # print(myresult1)
         myresult1 = myresult1[::-1]
         myresult1 = myresult1[:15]
+        mycursor1.execute("select * from users")
+        totalusers= mycursor1.fetchall();
+        totalusers = len(totalusers)
+       
         mycursor1.close()
         mydb1.close()
     except Exception as e:
@@ -66,7 +71,7 @@ def home():
     # finally:
     #     return redirect(url_for(""))
     #     con.close()   
-    return render_template("dashboard.html",items = myresult1)
+    return render_template("dashboard.html",items = myresult1, totalusers = totalusers, totalvio = totalvio)
 
 @app.route('/new',methods=["GET","POST"]) #decorator drfines the   
 def new():
