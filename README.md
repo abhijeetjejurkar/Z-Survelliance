@@ -1,7 +1,9 @@
 # Z-Survelliance
 
 #### These are Some Snaps of Project
+
 <br />
+
 ##### Prediction of Withmask or Without mask Using CNN
 
 ![Prediction of Withmask or Without mask](https://user-images.githubusercontent.com/69970764/211024717-683cadc4-b782-4ec1-9511-a1a50a3be231.png)
